@@ -6,7 +6,7 @@
 
 直到最近帮别人开发些小工具，才体会到这门技术的美。对于一些使用人数很少的项目，部署一套 Web 服务代价比较大，如果使用 Electron 开发，打包好程序后扔给对方一个压缩包就可以了，而且 Electron 还拥有与操作系统交互的能力，使得功能可以做的更强大。于是决定深入了解一下 Electron，以下是根据这套教程做的一些记录：[Electron 教程](https://www.bilibili.com/video/BV1pY4y1i7Ac)。如有错漏之处，敬请指正。
 
-![img](https://assets.ng-tech.icu/item/db75225feabec8d8b64ee7d3c7165cd639554cbc.png@progressive.webp)
+![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/db75225feabec8d8b64ee7d3c7165cd639554cbc.png@progressive.webp)
 
 首先要说明一点，这套视频教程的时间比较早，大概 17 年的样子。教程中使用的 Electron 版本是 1.6.6，写这篇文章的时候 Electron 大版本已经更新到 19 了。不过我认为问题不大，如果你不是功利性特别强，需要学完找工作的话，从 1 号大版本学习也未尝不好。主要学习的是思想，具体的 API 细节等理解了思想后，边查文档边开发效率也很高。
 
@@ -163,11 +163,11 @@ npm run start
 
 打开调试器
 
-![img](https://assets.ng-tech.icu/item/9481f83ae6d3765dfd7df4a523bd1641870132b0.jpg@942w_575h_progressive.webp)通过程序菜单打开调试器
+![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/9481f83ae6d3765dfd7df4a523bd1641870132b0.jpg@942w_575h_progressive.webp)通过程序菜单打开调试器
 
 点击”上传视频“按钮并选择文件，然后点击”获取信息“按钮，程序会停在断点处，鼠标悬浮到 file 上可以看到视频的一些信息
 
-![img](https://assets.ng-tech.icu/item/9c8cf1ac53a4a4f51df2b3345048133fe0966e04.jpg@942w_846h_progressive.webp)上传视频的信息
+![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/9c8cf1ac53a4a4f51df2b3345048133fe0966e04.jpg@942w_846h_progressive.webp)上传视频的信息
 
 这个上传是通过前端实现的，没有 Electron 的逻辑。可以看到虽然相比纯 Web 上传多了一些文件的信息（path、size），但是没有我们要的视频长度，这个功能视频教程中是靠 FFmpeg 实现的。
 
@@ -385,7 +385,7 @@ app.on("ready", () => {
 
 启动程序，可以看到我们自定义菜单了
 
-![img](https://assets.ng-tech.icu/item/960abd861dcf4934a4694b196e6d8673661c364c.jpg@771w_542h_progressive.webp)自定义菜单
+![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/960abd861dcf4934a4694b196e6d8673661c364c.jpg@771w_542h_progressive.webp)自定义菜单
 
 这时点击“添加 TODO”菜单是没有任何反应的，接下来我们增加新建窗口的逻辑。
 
@@ -472,7 +472,7 @@ const menuTemplate = [
 
 重新启动程序，然后点击菜单“文件”-“添加 TODO”，此时会弹出新建 TODO 窗口了
 
-![img](https://assets.ng-tech.icu/item/c09af3f7fe6b68b3c73b2ecba77da44ff7b2c197.jpg@942w_701h_progressive.webp)新建 TODO 窗口
+![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/c09af3f7fe6b68b3c73b2ecba77da44ff7b2c197.jpg@942w_701h_progressive.webp)新建 TODO 窗口
 
 最后就是实现新增 TODO，然后展示在主窗口的功能了。实现这个功能还是要使用到我们之前提到的 ipc 的四个方法。数据流向：新增窗口（add.html） ==》index.js ==》主窗口（index.html）。
 
@@ -547,11 +547,11 @@ ipcMain.on("todo:add", (e, newTodo) => {
 
 重新启动程序，试试看新建 TODO 吧
 
-![img](https://assets.ng-tech.icu/item/be745c3b6a52b10d51f21b65ebc226af2766bef4.jpg@731w_596h_progressive.webp)新建 TODO 成功！
+![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/be745c3b6a52b10d51f21b65ebc226af2766bef4.jpg@731w_596h_progressive.webp)新建 TODO 成功！
 
 至此我们项目二的主要功能就实现了，了解了自定义菜单与窗口间通信。但是还有一个问题没有解决，细心的童鞋可能发现了，我们自定义菜单后，原来默认的菜单就不见了。
 
-![img](https://assets.ng-tech.icu/item/3f74065b63dd21c2300955bf31a0190a2a138f1b.jpg@537w_149h_progressive.webp)Electron 程序默认的菜单
+![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/3f74065b63dd21c2300955bf31a0190a2a138f1b.jpg@537w_149h_progressive.webp)Electron 程序默认的菜单
 
 更要命的是，这些菜单不但在窗口中不显示了，它们对应的快捷键也失效了。比如现在我们就无法打开调试页面了，这使得在开发时就很不方便。
 
@@ -682,7 +682,7 @@ npm run electron
 
 运行成功后，应该会看到以下窗口
 
-![img](https://assets.ng-tech.icu/item/0552a5fb7ee939630d438517ce759d95681bd6c3.jpg@942w_713h_progressive.webp)项目 3 初始
+![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/0552a5fb7ee939630d438517ce759d95681bd6c3.jpg@942w_713h_progressive.webp)项目 3 初始
 
 走到这里我们项目 3 的准备工作就做好了，接下来我们要实现程序在状态栏的展示。
 
@@ -715,7 +715,7 @@ app.on("ready", () => {
 
 重新启动项目（只要将当前 Electron 的进程杀死就行，前端的进程不需要重启），运行完毕后，状态栏就有了图标展示了，鼠标悬浮 icon 还会有文字提示
 
-![img](https://assets.ng-tech.icu/item/96968610974b872c722045b5412d0a95353485fc.jpg@222w_59h_progressive.webp)状态栏 icon
+![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/96968610974b872c722045b5412d0a95353485fc.jpg@222w_59h_progressive.webp)状态栏 icon
 
 视频中这时没有将 tray 作为全局变量保存，咪咪我在 windows10 的机器上运行程序，icon 会出现闪退，原因就是局部变量的 Tray 实例被内存垃圾回收导致的，所以必须设置成全局变量才行。
 
@@ -816,7 +816,7 @@ app.on("ready", () => {
 
 重新运行程序，现在点击状态栏的 icon，会在上方弹出窗口（如果是苹果系统，窗口坐标的计算方式与 Windows 不同，视频中的老师是苹果系统），而且此时窗口的边框也没有了。
 
-![img](https://assets.ng-tech.icu/item/fded8919f3743671bfee8c7c68794f07cad9e49b.jpg@689w_1289h_progressive.webp)窗口直接定位在 icon 上方
+![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/fded8919f3743671bfee8c7c68794f07cad9e49b.jpg@689w_1289h_progressive.webp)窗口直接定位在 icon 上方
 
 > 屏幕的左上角坐标为(0, 0)，越往右边 x 越大，越往下边 y 越大。屏幕可视范围内，坐标的 x、y 值应该都是正数。窗口、icon 的坐标，都是以自己左上角的那个像素为标准。
 
