@@ -22,7 +22,7 @@ global.thing = {
 const thing = remote.getGlobal('thing')
 const { x, y, width, height } = thing.rectangle.getBounds()
 thing.rectangle.setBounds({ x, y, width, height: height + 100 })
-```javascript
+```
 在渲染器进程中执行这段代码涉及到九个往返的 IPC 消息：
 
 - 最初的 getGlobal()调用，返回一个代理对象。
@@ -46,7 +46,7 @@ obj.doThing();
 obj.on("thing-is-done", () => {
   doNextThing();
 });
-```javascript
+```
 其中 doThing 启动了一些进程，最终会触发 thing-is-done 事件。Node 中的 http 模块是一个很好的例子，该模块通常以这种方式使用。这在普通的 JavaScript 中是安全的，因为在你的代码运行完毕之前，是不可能触发 thing-is-done 事件的。然而，如果 obj 是一个远程对象的代理，那么这段代码就包含一个竞赛条件。说 doThing 是一个可以很快完成的操作。当我们在渲染器进程中调用 obj.doThing()的代理对象时，远程模块会向主进程发出 IPC。然后 doThing()会在主进程中被调用，它启动了它所做的任何事情，向渲染器进程返回 undefined 作为返回值。现在有两个执行线程：一个是正在做事情的主进程，另一个是即将向主进程发送消息，要求向 obj 添加一个事件处理程序的呈现器进程。如果事情完成得特别快，可能会发生这样的情况：在通知主进程渲染器进程对该事件感兴趣的消息到达之前，主进程就已经触发了 "事情已完成 "事件。
 
 ![Race condition between Main and Renderer process leading to unexpected behavior.](https://pic1.imgdb.cn/item/6352b1c016f2c2beb1ce44a2.jpg)
@@ -106,4 +106,4 @@ ipcMain.handle("read-file", async (event, path) => {
 // Renderer
 const data = await ipcRenderer.invoke("read-file", "/path/to/file");
 // ... do something with data ...
-```javascript
+```

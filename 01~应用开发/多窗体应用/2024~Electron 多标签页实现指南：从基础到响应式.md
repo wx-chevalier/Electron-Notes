@@ -13,7 +13,7 @@
   src={tab.url}
   style={{ display: activeTabId === tab.id ? "block" : "none" }}
 />
-```javascript
+```
 优点：
 
 - 实现简单直接
@@ -30,7 +30,7 @@
 ```typescript
 const win = new BrowserWindow({ show: false });
 win.loadURL(url);
-```javascript
+```
 优点：
 
 - 完全的进程隔离
@@ -67,7 +67,7 @@ interface TabState {
   lastAccessed: number;
   savedState?: any;
 }
-```javascript
+```
 ## 二、TabManager 完整实现
 
 ```typescript:src/main/TabManager.ts
@@ -413,7 +413,7 @@ function debounce(fn: Function, delay: number) {
     timer = setTimeout(() => fn(...args), delay);
   };
 }
-```javascript
+```
 ## 前端组件实现
 
 ### 1. TabBar 组件
@@ -537,7 +537,7 @@ export const TabBar: React.FC = () => {
     </div>
   );
 };
-```javascript
+```
 ### 2. TabItem 组件
 
 ```typescript:src/renderer/components/TabItem.tsx
@@ -629,7 +629,7 @@ export const TabItem: React.FC<TabItemProps> = ({
     </div>
   );
 };
-```javascript
+```
 ### 3. LoadingSpinner 组件
 
 ```typescript:src/renderer/components/LoadingSpinner.tsx
@@ -653,7 +653,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     />
   );
 };
-```javascript
+```
 ### 4. Tailwind 配置
 
 ```javascript:tailwind.config.js
@@ -685,7 +685,7 @@ module.exports = {
     }),
   ],
 }
-```javascript
+```
 ### 5. 全局样式
 
 ```css:src/renderer/styles/global.css
@@ -710,7 +710,7 @@ module.exports = {
     display: none;
   }
 }
-```javascript
+```
 这个实现提供了：
 
 1. **现代化的 UI 设计**
@@ -858,7 +858,7 @@ export class TabManager extends EventEmitter {
     }
   }
 }
-```javascript
+```
 ### 2. 预加载优化
 
 ```typescript:src/main/TabManager.ts
@@ -917,7 +917,7 @@ export class TabManager {
     }
   }
 }
-```javascript
+```
 ### 3. 资源管理优化
 
 ```typescript:src/main/ResourceManager.ts
@@ -980,7 +980,7 @@ export class ResourceManager {
     return report;
   }
 }
-```javascript
+```
 ### 4. 网络优化
 
 ```typescript:src/main/NetworkOptimizer.ts
@@ -1075,7 +1075,7 @@ export class NetworkOptimizer {
     }
   }
 }
-```javascript
+```
 这些优化实现主要关注：
 
 1. **内存管理**
@@ -1147,7 +1147,7 @@ export const TabBar: React.FC = () => {
     </div>
   );
 };
-```javascript
+```
 ```typescript:src/renderer/hooks/useDragSort.ts
 import { useState } from 'react';
 
@@ -1202,7 +1202,7 @@ export function useDragSort<T extends { id: string }>({
     handleDrop
   };
 }
-```javascript
+```
 ### 2. 标签页预览
 
 ```typescript:src/renderer/components/TabPreview.tsx
@@ -1268,7 +1268,7 @@ export const TabPreview: React.FC<TabPreviewProps> = ({
     />
   ) : null;
 };
-```javascript
+```
 ### 3. 标签页悬停预览
 
 ```typescript:src/renderer/components/TabItem.tsx
@@ -1330,7 +1330,7 @@ export const TabItem: React.FC<TabItemProps> = ({
     </div>
   );
 };
-```javascript
+```
 ### 4. 手势支持
 
 ```typescript:src/renderer/hooks/useTabGestures.ts
@@ -1391,7 +1391,7 @@ export function useTabGestures({
     handleTouchEnd
   };
 }
-```javascript
+```
 ### 5. 标签页动画
 
 ```typescript:src/renderer/components/TabBar.tsx
@@ -1427,7 +1427,7 @@ export const TabBar: React.FC = () => {
     </div>
   );
 };
-```javascript
+```
 ### 6. 更新 Tailwind 配置以支持动画
 
 ```javascript:tailwind.config.js
@@ -1461,7 +1461,7 @@ module.exports = {
     // ... 之前的插件 ...
   ],
 }
-```javascript
+```
 这些优化实现提供了：
 
 1. **拖拽排序**

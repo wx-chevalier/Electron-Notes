@@ -55,7 +55,7 @@ app.whenReady().then(() => {
 app.on("window-all-closed", function () {
   if (process.platform !== "darwin") app.quit();
 });
-```javascript
+```
 ```html
 <!DOCTYPE html>
 <html>
@@ -86,7 +86,7 @@ app.on("window-all-closed", function () {
     </script>
   </body>
 </html>
-```javascript
+```
 上面就是个简单的通讯演示了，通过设置 nodeIntegration: true 和 contextIsolation: false 在渲染进程中就可以直接使用 Node.js 的语法和模块了。ipcMain 和 ipcRenderer 两个模块分别用于主进程和渲染进程。传递消息时消息都会有个事件名称，两个模块分别用各自的 on() 方法来监听消息事件。只有 ipcRenderer 可以主动向 ipcMain 发送消息，ipcMain 只能在监听到来自 ipcRenderer 的事件后才可以返回消息。
 
 主线程中可以使用 BrowserWindow 对象的 webContents.send() 方法主动向该对象渲染进程发送消息，该渲染进程中同样使用 ipcRenderer.on() 来监听此消息。上面演示中 ipcRenderer 发送和 ipcMain 返回消息用的都是异步方法，它们还有同步方法可用，可以参考 Electron 官方的 API 文档。
@@ -112,7 +112,7 @@ contextBridge.exposeInMainWorld("myAPI", () => {
     console.log(arg);
   });
 });
-```javascript
+```
 分别改写 main.js 和 index.html 文件：
 
 ```js
@@ -122,11 +122,11 @@ const mainWindow = new BrowserWindow({
     preload: path.join(__dirname, "preload.js"), // 使用预加载脚本
   },
 });
-```javascript
+```
 ```html
 <!-- index.html中只要改写下面内容就好了 -->
 <script>
   window.myAPI();
 </script>
-```javascript
+```
 上面就是个简单的预加载的使用方式了，可以看到从使用角度来说其实也没太大差别，无非就是使用 contextBridge.exposeInMainWorld() 方法来传递 Node.js 的内容给了 window 对象。

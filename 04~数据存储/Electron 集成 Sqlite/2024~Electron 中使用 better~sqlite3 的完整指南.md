@@ -17,7 +17,7 @@ npm init -y
 # 安装依赖
 npm install electron better-sqlite3 --save
 npm install electron-builder electron-rebuild --save-dev
-```javascript
+```
 ### 2. package.json 配置
 
 ```json
@@ -67,7 +67,7 @@ npm install electron-builder electron-rebuild --save-dev
     }
   }
 }
-```javascript
+```
 ## 三、数据库管理类实现
 
 ### 1. 数据库管理器
@@ -179,7 +179,7 @@ export class Database {
     }
   }
 }
-```javascript
+```
 ### 2. 数据库迁移管理
 
 ```typescript
@@ -246,7 +246,7 @@ export class Migration {
     ];
   }
 }
-```javascript
+```
 ## 四、应用主进程实现
 
 ```typescript
@@ -339,7 +339,7 @@ app.on("activate", () => {
     application.init();
   }
 });
-```javascript
+```
 ## 五、构建和发布
 
 ### 1. 开发环境构建
@@ -353,7 +353,7 @@ npm run rebuild
 
 # 启动应用
 npm start
-```javascript
+```
 ### 2. 生产环境构建
 
 ```bash
@@ -365,7 +365,7 @@ npm run build:mac
 
 # Linux
 npm run build:linux
-```javascript
+```
 ### 3. 自动化构建脚本
 
 ```yaml
@@ -407,7 +407,7 @@ jobs:
         with:
           name: release-${{ matrix.os }}
           path: dist/*
-```javascript
+```
 ## 六、注意事项
 
 1. **跨平台兼容性**
@@ -454,7 +454,7 @@ try {
     "Failed to load database module. Please reinstall the application."
   );
 }
-```javascript
+```
 2. **数据库文件访问错误**
 
 ```typescript
@@ -464,14 +464,14 @@ const ensureDatabaseDirectory = () => {
     fs.mkdirSync(dbDir, { recursive: true });
   }
 };
-```javascript
+```
 3. **跨平台路径问题**
 
 ```typescript
 const dbPath = path
   .join(app.getPath("userData"), "database", "app.db")
   .replace(/\\/g, "/");
-```javascript
+```
 ## 八、总结
 
 在 Electron 应用中使用 better-sqlite3 需要特别注意：

@@ -19,7 +19,7 @@ const win = new BrowserWindow({
 
 // 加载内容
 win.loadURL("https://example.com");
-```javascript
+```
 - 是一个完整的窗口容器
 - 包含标题栏、窗口控制按钮
 - 可以包含多个 BrowserView
@@ -42,7 +42,7 @@ view.setBounds({ x: 0, y: 0, width: 800, height: 600 });
 
 // 加载内容
 view.webContents.loadURL("https://example.com");
-```javascript
+```
 - 是嵌入在 BrowserWindow 中的内容区域
 - 没有自己的窗口装饰
 - 可以独立加载和显示网页内容
@@ -62,7 +62,7 @@ view.webContents.loadURL("https://example.com");
 |  |                  | |
 |  +------------------+ |
 +------------------------+
-```javascript
+```
 ## 三、主要区别
 
 ### 1. 功能范围
@@ -81,7 +81,7 @@ const view = new BrowserView({
     nodeIntegration: true,
   },
 });
-```javascript
+```
 ### 2. 使用场景
 
 ```javascript
@@ -99,7 +99,7 @@ view.setBounds({
   width: 800,
   height: 530,
 });
-```javascript
+```
 ## 四、常见使用模式
 
 ### 1. 单窗口多视图
@@ -128,7 +128,7 @@ class MultiViewWindow {
     }
   }
 }
-```javascript
+```
 ### 2. 嵌入式浏览器
 
 ```javascript
@@ -159,7 +159,7 @@ class EmbeddedBrowser {
     this.browserView.webContents.loadURL(url);
   }
 }
-```javascript
+```
 ## 五、最佳实践
 
 ### 1. 何时使用 BrowserWindow
@@ -180,7 +180,7 @@ const customWindow = new BrowserWindow({
 
 // 3. 单一内容展示
 mainWindow.loadFile("index.html");
-```javascript
+```
 ### 2. 何时使用 BrowserView
 
 ```javascript
@@ -199,7 +199,7 @@ contentView.setBounds(/* ... */);
 
 // 3. 独立内容隔离
 view.webContents.setWindowOpenHandler(/* ... */);
-```javascript
+```
 ## 六、注意事项
 
 1. **内存管理**
@@ -207,7 +207,7 @@ view.webContents.setWindowOpenHandler(/* ... */);
 ```javascript
 // 及时清理不需要的视图
 view.webContents.destroy();
-```javascript
+```
 2. **安全考虑**
 
 ```javascript
@@ -217,13 +217,13 @@ const view = new BrowserView({
     contextIsolation: true,
   },
 });
-```javascript
+```
 3. **性能优化**
 
 ```javascript
 // 避免频繁切换视图
 // 复用视图而不是重新创建
-```javascript
+```
 4. **布局管理**
 
 ```javascript
@@ -237,7 +237,7 @@ win.on("resize", () => {
     height: bounds.height,
   });
 });
-```javascript
+```
 选择使用 BrowserWindow 还是 BrowserView 主要取决于：
 
 - 应用架构需求

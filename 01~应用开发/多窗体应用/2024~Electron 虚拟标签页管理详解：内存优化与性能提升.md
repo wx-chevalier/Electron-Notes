@@ -10,7 +10,7 @@
 
 ```typescript
 type TabStatus = "active" | "suspended" | "hibernated";
-```javascript
+```
 - **active**: 完全加载状态，可以立即交互
 - **suspended**: 挂起状态，保留基本状态但释放内存
 - **hibernated**: 休眠状态，仅保留最基本信息
@@ -41,7 +41,7 @@ interface TabConfig {
   favicon?: string;
   isLoading?: boolean;
 }
-```javascript
+```
 ## 二、核心实现
 
 ### 1. TabManager 基础架构
@@ -79,7 +79,7 @@ export class TabManager extends EventEmitter {
     });
   }
 }
-```javascript
+```
 ### 2. 内存管理策略
 
 ```typescript:src/main/TabManager.ts
@@ -129,7 +129,7 @@ export class TabManager {
     }
   }
 }
-```javascript
+```
 ### 3. 标签页状态转换
 
 ```typescript:src/main/TabManager.ts
@@ -199,7 +199,7 @@ export class TabManager {
     }
   }
 }
-```javascript
+```
 ### 4. 状态保存与恢复
 
 ```typescript:src/main/TabManager.ts
@@ -278,7 +278,7 @@ export class TabManager {
     await webContents.executeJavaScript(script);
   }
 }
-```javascript
+```
 ## 三、性能优化
 
 ### 1. 预加载机制
@@ -325,7 +325,7 @@ export class TabManager {
     }
   }
 }
-```javascript
+```
 ### 2. 错误处理
 
 ```typescript:src/main/TabManager.ts
@@ -369,7 +369,7 @@ export class TabManager {
     }
   }
 }
-```javascript
+```
 ## 四、使用建议
 
 1. **内存限制设置**

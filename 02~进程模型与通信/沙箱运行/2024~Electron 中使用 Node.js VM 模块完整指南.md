@@ -16,7 +16,7 @@ npm init -y
 
 # 安装依赖
 npm install electron --save
-```javascript
+```
 ### 2. package.json 配置
 
 ```json
@@ -35,7 +35,7 @@ npm install electron --save
     "electron-builder": "^24.6.0"
   }
 }
-```javascript
+```
 ## 三、沙箱实现
 
 ### 1. 基础沙箱类
@@ -80,7 +80,7 @@ export class BaseSandbox {
     });
   }
 }
-```javascript
+```
 ### 2. 高级沙箱实现
 
 ```typescript
@@ -233,7 +233,7 @@ export class AdvancedSandbox {
     }
   }
 }
-```javascript
+```
 ## 四、在主进程中使用
 
 ```typescript
@@ -305,7 +305,7 @@ const application = new App();
 app.whenReady().then(() => {
   application.init();
 });
-```javascript
+```
 ## 五、渲染进程集成
 
 ### 1. Preload 脚本
@@ -317,7 +317,7 @@ import { contextBridge, ipcRenderer } from "electron";
 contextBridge.exposeInMainWorld("sandbox", {
   execute: (code: string) => ipcRenderer.invoke("execute-code", code),
 });
-```javascript
+```
 ### 2. 渲染进程使用
 
 ```html
@@ -346,7 +346,7 @@ contextBridge.exposeInMainWorld("sandbox", {
     </script>
   </body>
 </html>
-```javascript
+```
 ## 六、安全性考虑
 
 1. **限制访问范围**
@@ -361,7 +361,7 @@ const restrictedGlobals = {
   Math: Object.freeze(Math),
   Date: Object.freeze(Date),
 };
-```javascript
+```
 2. **资源限制**
 
 ```typescript
@@ -371,7 +371,7 @@ const options = {
   memoryLimit: 50 * 1024 * 1024, // 50MB
   cpuLimit: 0.8, // 80% CPU 使用率
 };
-```javascript
+```
 3. **错误处理**
 
 ```typescript
@@ -386,7 +386,7 @@ function wrapExecution(code: string) {
     }
   `;
 }
-```javascript
+```
 ## 七、最佳实践
 
 1. **代码预编译**
@@ -412,7 +412,7 @@ const commonScripts = {
 Object.entries(commonScripts).forEach(([name, code]) => {
   sandbox.compileScript(code, `${name}.js`);
 });
-```javascript
+```
 2. **性能优化**
 
 ```typescript
@@ -432,7 +432,7 @@ class ScriptCache {
     this.cache.clear();
   }
 }
-```javascript
+```
 3. **监控和日志**
 
 ```typescript
@@ -464,7 +464,7 @@ class SandboxMonitor {
     };
   }
 }
-```javascript
+```
 ## 八、常见问题解决
 
 1. **内存泄漏**
@@ -489,7 +489,7 @@ class MemoryManager {
     }
   }
 }
-```javascript
+```
 2. **超时处理**
 
 ```typescript
@@ -518,7 +518,7 @@ class TimeoutManager {
     this.timeouts.clear();
   }
 }
-```javascript
+```
 ## 九、总结
 
 在 Electron 中使用 VM 模块需要注意：

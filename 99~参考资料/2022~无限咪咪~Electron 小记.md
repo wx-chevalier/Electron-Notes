@@ -20,12 +20,12 @@ electron 依赖安装命令（安装 1 号大版本，跟视频中保持一致�
 
 ```shell
 npm install --save-dev electron@1
-```javascript
+```
 不过由于某些原因，安装大概率会出错，可以使用这条命令替代
 
 ```shell
 ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/ npm install electron@1 -D --registry=https://registry.npm.taobao.org
-```javascript
+```
 这种包含 C++ 代码的库，安装起来都挺折腾的，初学者安装一个库花掉 1、2 个小时也不奇怪。
 
 # 项目 1：获取视频时长
@@ -48,7 +48,7 @@ const { app } = electron;
 app.on("ready", () => {
   console.log("app ready");
 });
-```javascript
+```
 package.json 文件新增一行
 
 ```javascript
@@ -60,17 +60,17 @@ package.json 文件新增一行
   },
 	...
 }
-```javascript
+```
 然后在命令输入
 
 ```shell
 npm run start
-```javascript
+```
 不出意外的话，控制台会输出
 
 ```shell
 app ready
-```javascript
+```
 这时我们的 App 进程就已经启动了，进程会持续运行，Windows 用户可以通过 Ctrl + c 终止进程。
 
 > 默认情况下，electron App process 不会向用户展示任何信息。
@@ -92,7 +92,7 @@ app ready
     <h1>首页</h1>
   </body>
 </html>
-```javascript
+```
 在 index.js 中增加 BrowserWindow 相关代码
 
 ```javascript
@@ -110,12 +110,12 @@ app.on("ready", () => {
   // __dirname 代表当前模块的目录名
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 });
-```javascript
+```
 启动命令
 
 ```shell
 npm run start
-```javascript
+```
 等待一小会儿后，程序窗口就有了，展示的内容就是我们加载的 HTML 文件内容。
 
 至此大概已经对 Electron 中的 App 与 BrowserWindow 是什么有点概念了吧。还记得我们这个程序要做什么吗，用户选择视频后，输出视频的时长。
@@ -144,12 +144,12 @@ npm run start
     });
   </script>
 </body>
-```javascript
+```
 然后启动程序
 
 ```shell
 npm run start
-```javascript
+```
 打开调试器
 
 ![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/9481f83ae6d3765dfd7df4a523bd1641870132b0.jpg@942w_575h_progressive.webp)通过程序菜单打开调试器
@@ -165,17 +165,17 @@ npm run start
 ```javascript
 Windows 用户参考 https://blog.csdn.net/qq_59636442/article/details/124526107
 苹果用户使用 Homebrew 安装
-```javascript
+```
 安装完成后，在控制台输入
 
 ```shell
 ffmpeg -version
-```javascript
+```
 输出相关信息表示安装成功了，然后我们要安装 fluent-ffmpeg 库，这个库是对 FFmpeg 的一层封装，方便 Node.js 使用 FFmpeg 的功能，使用 npm 安装
 
 ```shell
 npm install fluent-ffmpeg
-```javascript
+```
 安装完成后，解析视频的准备工作就做好了。
 
 视频教程里将解析视频长度的逻辑放在了 index.js 文件中，也就是 Electron 侧。视频中老版本 Electron 是可以在浏览器侧使用 Node.js Api 的，这时是靠约定来实现代码复用的。操作系统级别的逻辑，尽可能地放在 Electron 侧，让 Web 侧的逻辑保持简洁。
@@ -209,7 +209,7 @@ mainWindow 为 BrowserWindow 的实例，可以为任意名字。不同的窗口
   });
 </script>
 ...
-```javascript
+```
 在 script 标签中使用 require 方法，第一眼看到肯定会感到有点违和，这是 Electron 提供给我们的能力。（新版本无法使用这种方法，需要通过事先加载 preload.js ，使得 Web 侧获取调用 Node.js API 的能力）
 
 Web 侧发送了视频路径，我们在 Electron 侧接收消息，index.js 中增加对应代码
@@ -238,7 +238,7 @@ ipcMain.on("video:submit", (e, path) => {
     mainWindow.webContents.send("video:duration", metadata.format.duration);
   });
 });
-```javascript
+```
 获取视频时长后，再发送给 Web 侧，Web 侧接收后在视图上展示
 
 ```html
@@ -262,7 +262,7 @@ ipcMain.on("video:submit", (e, path) => {
   });
 </script>
 ...
-```javascript
+```
 项目小结，通过这个项目，我们学习到
 
 1. 如何启动 Electron App
@@ -292,7 +292,7 @@ index.html
     <ul></ul>
   </body>
 </html>
-```javascript
+```
 我们先增加一个菜单，菜单下拉后有“添加 TODO”和“退出”两个子菜单。自定义下拉菜单通过配置菜单模板实现，菜单模板格式如下
 
 ```javascript
@@ -306,7 +306,7 @@ const menuTemplateItem = {
   // 下级菜单列表
   submenu: [],
 };
-```javascript
+```
 在 index.js 中定义菜单模板
 
 ```javascript
@@ -339,7 +339,7 @@ const menuTemplate = [
     ],
   },
 ];
-```javascript
+```
 定义完菜单模板后，在 App ready 事件回调中设置菜单
 
 ```javascript
@@ -361,7 +361,7 @@ app.on("ready", () => {
   // 设置应用菜单
   Menu.setApplicationMenu(menu);
 });
-```javascript
+```
 启动程序，可以看到我们自定义菜单了
 
 ![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/960abd861dcf4934a4694b196e6d8673661c364c.jpg@771w_542h_progressive.webp)自定义菜单
@@ -389,7 +389,7 @@ app.on("ready", () => {
     </form>
   </body>
 </html>
-```javascript
+```
 新建窗口的逻辑还是通过 BrowserWindow 类来实现的，但是这次我们把新建逻辑封装成一个函数，在 index.js 增加 createAddWindow 函数
 
 ```javascript
@@ -410,7 +410,7 @@ function createAddWindow() {
   // 通过手动赋值 null 释放之前的对象
   addWindow.on("closed", () => (addWindow = null));
 }
-```javascript
+```
 菜单模板增加“添加 TODO”菜单的点击事件
 
 ```javascript
@@ -445,7 +445,7 @@ const menuTemplate = [
 ];
 
 // ...
-```javascript
+```
 重新启动程序，然后点击菜单“文件”-“添加 TODO”，此时会弹出新建 TODO 窗口了
 
 ![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/c09af3f7fe6b68b3c73b2ecba77da44ff7b2c197.jpg@942w_701h_progressive.webp)新建 TODO 窗口
@@ -471,7 +471,7 @@ const menuTemplate = [
   </script>
   <!-- ... -->
 </body>
-```javascript
+```
 index.js 中接收新 TODO 的值，并发送到 index.html 中
 
 ```javascript
@@ -492,7 +492,7 @@ ipcMain.on("todo:add", (e, newTodo) => {
   // 程序一般设计就是新增后，自动关闭新增窗口
   addWindow.close();
 });
-```javascript
+```
 在 index.html 中接收 Electron 侧发来的消息
 
 ```html
@@ -517,7 +517,7 @@ ipcMain.on("todo:add", (e, newTodo) => {
     });
   </script>
 </body>
-```javascript
+```
 重新启动程序，试试看新建 TODO 吧
 
 ![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/be745c3b6a52b10d51f21b65ebc226af2766bef4.jpg@731w_596h_progressive.webp)新建 TODO 成功！
@@ -550,7 +550,7 @@ if (process.env.NODE_ENV !== "production") {
     ],
   });
 }
-```javascript
+```
 现在重新运行程序，菜单栏多了“开发”，这样我们就可以开发坏境下打开调试器了。
 
 除了调试器，我们还希望增加刷新页面功能，Web 侧的改动可以直接刷新更新，只需要在刚刚的代码中做一点小小的改动
@@ -572,7 +572,7 @@ if (process.env.NODE_ENV !== "production") {
     ],
   });
 }
-```javascript
+```
 再重新启动程序，现在“开发”菜单中不但增加了“Reload”子菜单，而且还增加了快捷键刷新。
 
 项目小结，通过这个项目，我们学习到
@@ -590,12 +590,12 @@ if (process.env.NODE_ENV !== "production") {
 
 ```javascript
 https://github.com/StephenGrider/ElectronCode
-```javascript
+```
 下载或克隆下来的项目，进入 \boilerplates\tasky 文件夹，然后在 package.json 中，把 electron 的版本改成 1.8.8（原版可能会有安装问题），版本号改好后，在命令行执行 npm 安装命令
 
 ```shell
 ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/ npm install --registry=https://registry.npm.taobao.org
-```javascript
+```
 等待依赖安装完毕，在项目根目录新建 index.js 文件，增加 Electron “模板”代码，注意 main 窗口加载的 HTML 文件路径
 
 ```javascript
@@ -609,12 +609,12 @@ app.on("ready", () => {
   mainWindow = new BrowserWindow({});
   mainWindow.loadURL(`file://${__dirname}/src/index.html`);
 });
-```javascript
+```
 这个项目和我们之前两个项目有一点点区别，这个项目的前端是用 React 写的，如果你不熟悉 React 也没有关系，我们的重点还是放在 Electron 上，只是如何运行这个项目需要注意下，需要先启动前端项目，在命令行输入
 
 ```shell
 npm run start
-```javascript
+```
 等待几秒后，在命令窗口看到下面的输出说明前端项目启动好了
 
 ```shell
@@ -639,12 +639,12 @@ chunk    {0} bundle.js (main) 227 kB [entry] [rendered]
    [25] multi (webpack)-dev-server/client?http://localhost:4172 ./src/index.js 40 bytes {0} [built]
      + 12 hidden modules
 webpack: Compiled successfully.
-```javascript
+```
 此时在**新的**命令窗口，运行我们 Electron 项目
 
 ```shell
 npm run electron
-```javascript
+```
 运行成功后，应该会看到以下窗口
 
 ![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/0552a5fb7ee939630d438517ce759d95681bd6c3.jpg@942w_713h_progressive.webp)项目 3 初始
@@ -676,7 +676,7 @@ app.on("ready", () => {
   // 增加状态栏 icon 的悬浮提示
   tray.setToolTip("提示");
 });
-```javascript
+```
 重新启动项目（只要将当前 Electron 的进程杀死就行，前端的进程不需要重启），运行完毕后，状态栏就有了图标展示了，鼠标悬浮 icon 还会有文字提示
 
 ![img](https://ngte-superbed.oss-cn-beijing.aliyuncs.com/item/96968610974b872c722045b5412d0a95353485fc.jpg@222w_59h_progressive.webp)状态栏 icon
@@ -707,7 +707,7 @@ app.on("ready", () => {
     }
   });
 });
-```javascript
+```
 重启项目，此时点击 icon 已经实现了类似 toggle 窗口的效果。
 
 如果作为普通程序，那做到这一步就差不多了，但是这次我们想实现一个类似小工具的程序，点击状态栏的 icon 后，直接在附近弹出一个小窗口，在窗口中进行操作，而不是把 icon 作为开关程序的入口而已。
@@ -771,7 +771,7 @@ app.on("ready", () => {
     }
   });
 });
-```javascript
+```
 （视频中隐藏程序在任务栏的显示是通过 App.dock.hide 实现的，这个方法只有苹果系统中才可以用，Windows 系统下 App.dock 是 undefined，如果要隐藏任务栏的显示要通过 BrowserWindow 新建实例时传参 skipTaskbar）
 
 > Mac OS X 是面向应用程序的，而 Windows 是面向窗口的。
@@ -812,7 +812,7 @@ app.on("ready", () => {
     tray.popUpContextMenu(menuTemplate);
   });
 });
-```javascript
+```
 重启程序，现在右键点击 icon 有菜单弹出了。
 
 至此项目 3 就进行的差不多了，视频中还有两点文章中没有说明，一个是视频中老师将 Tray 等功能封装成单独的 Class 了，这属于 ES6 特性，感兴趣的同学可以自己尝试下。还有一点就是视频中通过 tray.setTitle 方法设置 icon 区域的文字展示，这个应该是苹果系统下独有的功能，Windows 用户了解一下即可，由于方法本身也比较简单，这里就不多赘述了。
