@@ -60,8 +60,7 @@ app.on("ready", () => {
     }
   });
 });
-```
-
+```javascript
 ```js
 //网页端部分代码
 //Electron环境判断
@@ -103,4 +102,4 @@ if (isElectron && typeof EventSource !== "undefined") {
     "当前浏览器不支持使用EventSource接收服务器推送事件!"
   );
 }
-```
+```javascript

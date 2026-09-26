@@ -36,8 +36,7 @@ function setDefaultProtocol() {
 }
 
 setDefaultProtocol();
-```
-
+```javascript
 ### 1.4 使用协议
 
 使用方式: 在浏览器地址栏输入注册好的协议，即可唤起应用。
@@ -50,8 +49,7 @@ setDefaultProtocol();
 
 ```js
 electron-fiddle://参数
-```
-
+```javascript
 ### 1.5 监听应用程序被唤醒
 
 应用程序唤起，mac 系统会触发`open-url`事件，window 系统会触发`second-instance`事件。
@@ -96,8 +94,7 @@ function watchProtocol() {
 // 在ready事件回调中监听自定义协议唤起
 watchProtocol();
 console.log("监听成功");
-```
-
+```javascript
 ### 1.6 应用场景
 
 1. 单纯唤醒应用 只需注册协议，系统会自动打开应用。表现：如果应用未打开将打开应用，如果应用已经打开应用将会激活应用窗口。
@@ -135,8 +132,7 @@ url 包含://
 protocol.registerSchemesAsPrivileged([
   { scheme: "myscheme", privileges: { bypassCSP: true } },
 ]);
-```
-
+```javascript
 ### 2.2 protocol.registerFileProtocol
 
 拦截自定义协议的请求回调，重新处理后再请求路径。
@@ -157,8 +153,7 @@ protocol.registerFileProtocol(
     if (error) console.error("Failed to register protocol");
   }
 );
-```
-
+```javascript
 ### 2.3 使用方式
 
 在 html 中使用自定义协议请求文件，即可自动拦截。
@@ -167,8 +162,7 @@ protocol.registerFileProtocol(
 
 ```js
 <img src={"myscheme://page/protocol/wakeUp.jpg"} alt="wakeUp" />
-```
-
+```javascript
 ### 2.4 protocol 其他 API
 
 ```js
@@ -181,4 +175,4 @@ protocol.interceptStringProtocol(scheme, handler);
 protocol.interceptBufferProtocol(scheme, handler);
 protocol.interceptHttpProtocol(scheme, handler);
 protocol.interceptStreamProtocol(scheme, handler);
-```
+```javascript
