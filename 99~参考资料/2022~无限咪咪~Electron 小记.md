@@ -742,10 +742,6 @@ app.on("ready", () => {
     mainWindow.hide();
   });
 
-  const iconPath = path.join(__dirname, "./src/assets/windows-icon@2x.png");
-  tray = new Tray(iconPath);
-  tray.setToolTip("提示");
-
   // icon 的点击回调的第二个参数是 icon 的坐标
   tray.on("click", (e, bound) => {
     // x - icon 左上角的 x 坐标
